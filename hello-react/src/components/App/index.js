@@ -82,7 +82,6 @@ import { Link } from 'react-router-dom';
 //    setType(event.target.value)
 //  }
 
-
 //  return(
 //      <div>
 //          <Header firststate="1st State" secondstate="Change State" clickstate="click change state"/>
