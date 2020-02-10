@@ -6,6 +6,7 @@ function Header(props) {
   var text = "ToT"
   if(props.firststate)
     text=props.firststate;
+    
   const[name,setName] = useState(text);
 
   console.log(props.firststate);

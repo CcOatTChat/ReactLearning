@@ -81,7 +81,8 @@ import { Link } from 'react-router-dom';
 //  function onChange(event){
 //    setType(event.target.value)
 //  }
-//
+
+
 //  return(
 //      <div>
 //          <Header firststate="1st State" secondstate="Change State" clickstate="click change state"/>
@@ -112,6 +113,7 @@ class AppRoute extends Component{
           <h1><Link to="/header"> Header </Link></h1>
           <h1><Link to="/content"> Content </Link></h1>
           <h1><Link to="/footer"> Footer </Link></h1>
+          <h1><Link to="/Counter"> Counter </Link></h1>
         </div>
     );
   }
