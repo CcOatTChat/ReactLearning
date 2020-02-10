@@ -114,6 +114,19 @@ class AppRoute extends Component{
 
     const greeting = getGreeting('JavaScript');
 
+    var users = [
+      { name : "DevOatT" , isDev:true},
+      { name : "oOatT" , isDev:true},
+      { name : "Assasin" , isDev:false},
+    ];
+
+    const numbers = [10,20,30,40];
+    const result = numbers.reduce((sum,number) => {
+      console.log(sum + ' ' + number);
+
+      return sum + number; 
+    }, 0)
+
     return(
         <div>
           <h1>Learn React</h1>
@@ -122,6 +135,14 @@ class AppRoute extends Component{
           <h1><Link to="/footer"> Footer </Link></h1>
           <h1><Link to="/Counter"> Counter </Link></h1>
           <h2>{greeting}</h2>
+          <ul>
+            {
+              users
+                .filter(user => user.isDev)
+                .map(user => <li>{user.name}</li>)
+            }
+          </ul>
+          {result}
         </div>
     );
   }
