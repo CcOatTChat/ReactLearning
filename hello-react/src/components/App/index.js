@@ -107,6 +107,14 @@ import { Link } from 'react-router-dom';
 
 class AppRoute extends Component{
   render(){
+    
+    const getGreeting = (text) => {
+      //return `Welcome to ` + text;
+      return `Welcome to ${text}`;
+    }
+
+    const greeting = getGreeting('JavaScript');
+
     return(
         <div>
           <h1>Learn React</h1>
@@ -114,6 +122,7 @@ class AppRoute extends Component{
           <h1><Link to="/content"> Content </Link></h1>
           <h1><Link to="/footer"> Footer </Link></h1>
           <h1><Link to="/Counter"> Counter </Link></h1>
+          <h2>{greeting}</h2>
         </div>
     );
   }
