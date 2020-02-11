@@ -1,6 +1,11 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Person , { firstname , lastname}  from '../../Person';
+
+console.log(`${firstname}  ${lastname}`);
+console.log(`${Person.firstname}  ${Person.lastname}`);
+console.log(Person);
 
 // สร้าง Component - JSX
 //class App2 extends Component{
@@ -127,7 +132,7 @@ class AppRoute extends Component{
 
     let name = "CHatchai";
     name ="AZAa"
-    console.log(name);
+    //console.log(name);
 
     const numbers = [10,20,30,40];
     const result = numbers.reduce((sum,number) => {
