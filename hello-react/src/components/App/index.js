@@ -1,6 +1,12 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Person , { firstname , lastname}  from '../../Person';
+import axios from 'axios';
+
+//console.log(`${firstname}  ${lastname}`);
+//console.log(`${Person.firstname}  ${Person.lastname}`);
+//console.log(Person);
 
 // สร้าง Component - JSX
 //class App2 extends Component{
@@ -105,23 +111,101 @@ import { Link } from 'react-router-dom';
 //}
 
 class AppRoute extends Component{
+
+  state ={
+    persons:[]
+  }
+
+  componentDidMount(){
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(res => {
+        const persondata =res.data;
+        this.setState({persons : persondata})
+      })
+  }
+
+  // Higher Order Functions // function in function
+
   render(){
+
+    const  arr =[1,2,3,4];
+    const arrMultiply = arr.map(function(number){
+      return number * number;
+    });
     
     const getGreeting = (text) => {
       //return `Welcome to ` + text;
-      return `Welcome to ${text}`;
+      return `Welcome to ${text}`; // alt + 96
     }
 
     const greeting = getGreeting('JavaScript');
 
+    var users = [
+      { name : "DevOatT" , isDev:true},
+      { name : "oOatT" , isDev:true},
+      { name : "HulaaHoop" , isDev:true},
+      { name : "Assasin" , isDev:false},
+    ];
+
+    // Ternary Operator     // if else แบบสั้น  ||    ___ ? _T_ : _F_  ||  __ && T
+    const showUsers = true;
+
+    const numbers = [10,20,30,40];
+    const result = numbers.reduce((sum,number) => {
+      return sum + number; 
+    }, 0)
+
+    // Spread Operator ...
+    const name = "chatchai";
+    const charactor = [...name];
+    //console.log(charactor);   // string => array
+
+    const items = ['this','is','a','book'];
+    //console.log(items);
+    //console.log(...items); // array => string
+
+    const numbersList = [5,10,20,30,55];
+    //console.log(Math.max(...numbersList));
+    //console.log(numbersList);
+    //console.log(...numbersList);
+
+    const obj1 = { firstname: 'Cc', body: 'smart', age : 26};
+    const obj2 ={ lastname:'tail', gender : 'M'}
+    //console.log(obj2);
+
+    const newObj = {...obj1,...obj2,planet:'Earth'};
+    //console.log(newObj);
+
+    // Destructuring  -- Copy item ojb or array
+    const address = [123,'sanpatong','chiangmai'];
+    const [ houseNo,  ,city ] = address;
+    console.log(houseNo  , city);
+
+    const {firstname ,age} = obj1;
+    console.log(firstname  , age);
+
     return(
-        <div>
-          <h1>Learn React</h1>
-          <h1><Link to="/header"> Header </Link></h1>
-          <h1><Link to="/content"> Content </Link></h1>
-          <h1><Link to="/footer"> Footer </Link></h1>
-          <h1><Link to="/Counter"> Counter </Link></h1>
-          <h2>{greeting}</h2>
+        <div className="App">
+          <header className="App-header">
+            {arrMultiply}
+            {this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
+
+            <h1><Link to="/header"> Header </Link></h1>
+            <h1><Link to="/content"> Content </Link></h1>
+            <h1><Link to="/footer"> Footer </Link></h1>
+            <h1><Link to="/Counter"> Counter </Link></h1>
+            <h2>{greeting}</h2>
+            {
+              showUsers ? (
+                <ul>
+                {users.filter(user => user.isDev).map(user => <li key={user.name}>{user.name}</li>)}
+                </ul>
+              ) : (
+                null
+              )
+            }
+            {result}
+          </header>
         </div>
     );
   }
