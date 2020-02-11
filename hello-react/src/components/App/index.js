@@ -135,7 +135,7 @@ class AppRoute extends Component{
     
     const getGreeting = (text) => {
       //return `Welcome to ` + text;
-      return `Welcome to ${text}`;
+      return `Welcome to ${text}`; // alt + 96
     }
 
     const greeting = getGreeting('JavaScript');
@@ -150,14 +150,39 @@ class AppRoute extends Component{
     // Ternary Operator     // if else แบบสั้น  ||    ___ ? _T_ : _F_  ||  __ && T
     const showUsers = true;
 
-    let name = "CHatchai";
-    name ="AZAa"
-    //console.log(name);
-
     const numbers = [10,20,30,40];
     const result = numbers.reduce((sum,number) => {
       return sum + number; 
     }, 0)
+
+    // Spread Operator ...
+    const name = "chatchai";
+    const charactor = [...name];
+    //console.log(charactor);   // string => array
+
+    const items = ['this','is','a','book'];
+    //console.log(items);
+    //console.log(...items); // array => string
+
+    const numbersList = [5,10,20,30,55];
+    //console.log(Math.max(...numbersList));
+    //console.log(numbersList);
+    //console.log(...numbersList);
+
+    const obj1 = { firstname: 'Cc', body: 'smart', age : 26};
+    const obj2 ={ lastname:'tail', gender : 'M'}
+    //console.log(obj2);
+
+    const newObj = {...obj1,...obj2,planet:'Earth'};
+    //console.log(newObj);
+
+    // Destructuring  -- Copy item ojb or array
+    const address = [123,'sanpatong','chiangmai'];
+    const [ houseNo,  ,city ] = address;
+    console.log(houseNo  , city);
+
+    const {firstname ,age} = obj1;
+    console.log(firstname  , age);
 
     return(
         <div className="App">
