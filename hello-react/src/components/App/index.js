@@ -117,32 +117,46 @@ class AppRoute extends Component{
     var users = [
       { name : "DevOatT" , isDev:true},
       { name : "oOatT" , isDev:true},
+      { name : "HulaaHoop" , isDev:true},
       { name : "Assasin" , isDev:false},
     ];
 
+    // Ternary Operator     // if else แบบสั้น  ||    ___ ? _T_ : _F_  ||  __ && T
+    const showUsers = true;
+
+
+    let name = "CHatchai";
+    name ="AZAa"
+    console.log(name);
+
     const numbers = [10,20,30,40];
     const result = numbers.reduce((sum,number) => {
-      console.log(sum + ' ' + number);
+      //console.log(sum + ' ' + number);
 
       return sum + number; 
     }, 0)
 
     return(
-        <div>
-          <h1>Learn React</h1>
-          <h1><Link to="/header"> Header </Link></h1>
-          <h1><Link to="/content"> Content </Link></h1>
-          <h1><Link to="/footer"> Footer </Link></h1>
-          <h1><Link to="/Counter"> Counter </Link></h1>
-          <h2>{greeting}</h2>
-          <ul>
+        <div className="App">
+          <header className="App-header">
+
+
+            <h1><Link to="/header"> Header </Link></h1>
+            <h1><Link to="/content"> Content </Link></h1>
+            <h1><Link to="/footer"> Footer </Link></h1>
+            <h1><Link to="/Counter"> Counter </Link></h1>
+            <h2>{greeting}</h2>
             {
-              users
-                .filter(user => user.isDev)
-                .map(user => <li>{user.name}</li>)
+              showUsers ? (
+                <ul>
+                {users.filter(user => user.isDev).map(user => <li>{user.name}</li>)}
+                </ul>
+              ) : (
+                null
+              )
             }
-          </ul>
-          {result}
+            {result}
+          </header>
         </div>
     );
   }
