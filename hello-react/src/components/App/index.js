@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../Header';
 
 import Person , { firstname , lastname}  from '../../Person';
 import axios from 'axios';
@@ -86,8 +87,7 @@ import axios from 'axios';
 //
 //  function onChange(event){
 //    setType(event.target.value)
-//  }
-
+//  
 //  return(
 //      <div>
 //          <Header firststate="1st State" secondstate="Change State" clickstate="click change state"/>
@@ -108,6 +108,7 @@ import axios from 'axios';
 //          <h2> On Change Value : {type}</h2>
 //      </div>
 //  );
+//}
 //}
 
 class AppRoute extends Component{
@@ -185,8 +186,8 @@ class AppRoute extends Component{
     console.log(firstname  , age);
 
     return(
-        <div className="App">
-          <header className="App-header">
+        <div>
+            <h1>learn react</h1>
             {arrMultiply}
             {this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
 
@@ -205,7 +206,6 @@ class AppRoute extends Component{
               )
             }
             {result}
-          </header>
         </div>
     );
   }
