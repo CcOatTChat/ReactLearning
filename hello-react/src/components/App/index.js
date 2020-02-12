@@ -4,6 +4,7 @@ import Header from '../../Header';
 
 import Person , { firstname , lastname}  from '../../Person';
 import axios from 'axios';
+import * as mysql from 'mysql';
 
 //console.log(`${firstname}  ${lastname}`);
 //console.log(`${Person.firstname}  ${Person.lastname}`);
@@ -114,22 +115,44 @@ import axios from 'axios';
 class AppRoute extends Component{
 
   state ={
-    persons:[]
+    persons:[],
+    name: null
   }
 
+  //constructor(props) {
+	//	super(props);
+	//	this.state = {
+	//		name: null
+	//	};
+	//}
+
   componentDidMount(){
+    console.log("run");
     axios.get('https://jsonplaceholder.typicode.com/users')
-      .then(res => {
-        const persondata =res.data;
-        this.setState({persons : persondata})
-      })
+    .then(res => {
+      const persondata =res.data;
+      this.setState({persons : persondata})
+    })
   }
+
+  //async componentDidMount() {
+	//	try {
+	//		let r = await fetch('/api/hello');
+	//		let name = await r.json();
+	//		this.setState({ name });
+	//	} catch (error) {
+	//		console.log(error);
+	//	}
+	//}
 
   // Higher Order Functions // function in function
 
   render(){
+		//<main className="container my-5">
+		//		<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
+		//</main>
 
-    const  arr =[1,2,3,4];
+    const arr =[1,2,3,4];
     const arrMultiply = arr.map(function(number){
       return number * number;
     });
@@ -180,14 +203,14 @@ class AppRoute extends Component{
     // Destructuring  -- Copy item ojb or array
     const address = [123,'sanpatong','chiangmai'];
     const [ houseNo,  ,city ] = address;
-    console.log(houseNo  , city);
+    //console.log(houseNo  , city);
 
     const {firstname ,age} = obj1;
-    console.log(firstname  , age);
+    //console.log(firstname  , age);
 
     return(
         <div>
-            <h1>learn react</h1>
+            <h1>learn react {this.state.name}</h1>
             {arrMultiply}
             {this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
 
