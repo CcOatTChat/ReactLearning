@@ -1,6 +1,5 @@
-import React, { Component, useState } from 'react';
+import React, {  useState } from 'react';
 import { Link } from 'react-router-dom';
-
 
 function Header(props) {
   var text = "ToT"
@@ -8,7 +7,6 @@ function Header(props) {
     text=props.firststate;
     
   const[name,setName] = useState(text);
-
   console.log(props.firststate);
 
   setTimeout(() => {

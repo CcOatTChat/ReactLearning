@@ -4,7 +4,7 @@ import Header from '../../Header';
 
 import Person , { firstname , lastname}  from '../../Person';
 import axios from 'axios';
-import * as mysql from 'mysql';
+//import * as mysql from 'mysql';
 
 //console.log(`${firstname}  ${lastname}`);
 //console.log(`${Person.firstname}  ${Person.lastname}`);
@@ -128,10 +128,15 @@ class AppRoute extends Component{
 
   componentDidMount(){
     console.log("run");
-    axios.get('https://jsonplaceholder.typicode.com/users')
+   
+    //https://jsonplaceholder.typicode.com/users
+    axios.get('http://localhost:3000/users')
     .then(res => {
       const persondata =res.data;
       this.setState({persons : persondata})
+    })
+    .catch(err =>{
+      console.log(err);
     })
   }
 

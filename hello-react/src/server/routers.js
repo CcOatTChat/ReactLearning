@@ -1,22 +1,30 @@
-import * as express from 'express';
-import DB from './db';
+const express = require('express');
+const path = require('path')
+const DB =  require('./db');
 
 const router = express.Router();
 
-router.get('/api/hello',(req,res,next) =>{
-    console.log("route API Hello");
+router.get('/',(req,res) =>{
+    console.log("ssss");
+    res.json('world');
+    //res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+
+router.get('/hello',(req,res,next) =>{
+    console.log("route  Hello");
     res.json('world');
 })
 
-router.get('/api/test', async(req,res) =>{
+router.get('/users', async(req,res) =>{
     try{
-        let tests = await DB.Tests.all();
-        res.json(tests)
+        let users = await DB.Users.all();
+        res.json(users)
+        console.log(users);
     }catch(e){
         console.log(e);
         res.sendStatus(500);
     }
 })
 
-
-export default router;
+module.exports = router;
+//export default router;
