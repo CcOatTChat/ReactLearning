@@ -1,9 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../Header';
+//import Header from '../../Header';
 
-import Person , { firstname , lastname}  from '../../Person';
+//import Person , { firstname , lastname}  from '../../Person';
 import axios from 'axios';
+import user from '../../model/user'
 //import * as mysql from 'mysql';
 
 //console.log(`${firstname}  ${lastname}`);
@@ -116,24 +117,49 @@ class AppRoute extends Component{
 
   state ={
     persons:[],
-    name: null
+    name: null,
+    users :[],
+    user : {
+      userid : "" ,
+      firstname: ""  ,
+      lastname: ""  ,
+      age : 0 
+    }
   }
 
-  //constructor(props) {
-	//	super(props);
-	//	this.state = {
-	//		name: null
-	//	};
-	//}
-
+ 
   componentDidMount(){
+    var config = {
+      headers: {
+              'Access-Control-Allow-Origin': '*',
+              //'Content-Type' : 'application/json'
+              }
+    };
+
     console.log("run");
    
     //https://jsonplaceholder.typicode.com/users
-    axios.get('http://localhost:3000/users')
+    axios.get('http://localhost:5000/users')
     .then(res => {
-      const persondata =res.data;
-      this.setState({persons : persondata})
+      console.log("Data coming");
+      console.log(res);
+      const users =res.data;
+      // let myArray = [];
+      // users.map( rs =>{
+      //   user.user.userid = rs['userid'];
+      //   user.user.firstname = rs['firstname'];
+      //   user.user.lastname = rs['lastname'];
+      //   user.user.age = rs['age'];
+
+ 
+      //    console.log(user.user);
+      //    myArray.push(user.user);
+      //    console.log(myArray);
+      // });
+
+      console.log(users);
+
+      this.setState({persons : users})
     })
     .catch(err =>{
       console.log(err);
@@ -153,9 +179,6 @@ class AppRoute extends Component{
   // Higher Order Functions // function in function
 
   render(){
-		//<main className="container my-5">
-		//		<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
-		//</main>
 
     const arr =[1,2,3,4];
     const arrMultiply = arr.map(function(number){
@@ -168,13 +191,6 @@ class AppRoute extends Component{
     }
 
     const greeting = getGreeting('JavaScript');
-
-    var users = [
-      { name : "DevOatT" , isDev:true},
-      { name : "oOatT" , isDev:true},
-      { name : "HulaaHoop" , isDev:true},
-      { name : "Assasin" , isDev:false},
-    ];
 
     // Ternary Operator     // if else แบบสั้น  ||    ___ ? _T_ : _F_  ||  __ && T
     const showUsers = true;
@@ -217,7 +233,7 @@ class AppRoute extends Component{
         <div>
             <h1>learn react {this.state.name}</h1>
             {arrMultiply}
-            {this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
+            {this.state.persons.map(person => <li key={person.userid}>{person.firstname} {person.lastname} {person.age}</li>)}
 
             <h1><Link to="/header"> Header </Link></h1>
             <h1><Link to="/content"> Content </Link></h1>
@@ -225,13 +241,13 @@ class AppRoute extends Component{
             <h1><Link to="/Counter"> Counter </Link></h1>
             <h2>{greeting}</h2>
             {
-              showUsers ? (
-                <ul>
-                {users.filter(user => user.isDev).map(user => <li key={user.name}>{user.name}</li>)}
-                </ul>
-              ) : (
-                null
-              )
+              // showUsers ? (
+              //   <ul>
+              //   {users.filter(userdata => userdata.isDev).map(userdata => <li key={userdata.name}>{userdata.name}</li>)}
+              //   </ul>
+              // ) : (
+              //   null
+              // )
             }
             {result}
         </div>
