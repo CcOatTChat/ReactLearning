@@ -41,13 +41,16 @@ const findByUserID = async(userId) =>{
 
 const addUser = async(data) =>{
     return new Promise((resolve,reject) => {
-        // Connection.query('SELECT * FROM test.user WHERE userid ='+ userId ,(err,results) =>{
-        //     if(err){
-        //         return reject(err);
-        //     }
+        const query = `INSERT INTO test.user (firstname,lastname,age) 
+                      VALUES ('${data.firstname}','${data.lastname}',${data.age})`;
+        //console.log(query); 
+        Connection.query(query ,(err,results) =>{
+             if(err){
+                 return reject(err);
+             }
 
-        //     resolve(results);
-        // });
+             resolve(results);
+        });
     });
 }
 

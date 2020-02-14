@@ -136,13 +136,12 @@ class AppRoute extends Component{
               }
     };
 
-    console.log("run");
+    //console.log("run");
    
     //https://jsonplaceholder.typicode.com/users
     axios.get('http://localhost:5000/users')
     .then(res => {
-      console.log("Data coming");
-      console.log(res);
+ 
       const users =res.data;
       // let myArray = [];
       // users.map( rs =>{
@@ -157,7 +156,7 @@ class AppRoute extends Component{
       //    console.log(myArray);
       // });
 
-      console.log(users);
+      //console.log(users);
 
       this.setState({persons : users})
     })

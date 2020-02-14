@@ -3,7 +3,6 @@ const DB =  require('./db');
 const router = express.Router();
 
 router.get('/',(req,res) =>{
-    console.log("ssss");
     res.json('world');
 
 });
@@ -16,7 +15,6 @@ router.get('/hello',(req,res,next) =>{
 router.get('/users', async(req,res) =>{  
     try{
         let userid = req.query.userid;
-        //console.log(userid);
         if (userid === undefined || userid === null || userid == "") {
             let users = await DB.Users.all();
             res.json(users)
@@ -41,19 +39,16 @@ router.get('/users/me', async(req,res) =>{
 });
 
 router.post('/users', async(req,res) =>{  
-    try{
-        console.log(req); 
-        console.log(req.body); 
-        var data = {firstname:req.body.firstname, lastname:req.body.lastname, age:req.body.age};
-        console.log(data); 
-        let users = await DB.Users.addUser(data);
-        res.json(users)
-    }catch(e){
-        console.log(e);
-        res.sendStatus(500);
-    }
+   try{
+       var data = {firstname:req.body.firstname, lastname:req.body.lastname, age:req.body.age};
+       
+       let users = await DB.Users.addUser(data);
+       res.json(users)
+   }catch(e){
+       console.log(e);
+       res.sendStatus(500);
+   }
 });
-
 
 // router.use(function(req, res, next) {
 //     console.log("set header use");
