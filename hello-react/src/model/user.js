@@ -1,12 +1,21 @@
-let user = {
+ let user = {
     userid : '',
     firstname :'',
     lastname :'',
-    age : 0
+    birthday : '',
+    email : ''
 }
 
+const clearData =() => {
+    user.firstname = "";
+    user.lastname = "";
+    user.birthday = "";
+    user.email = "";
+  }
+
 export default {
-    user
+    user,
+    clearData
 }
  
   

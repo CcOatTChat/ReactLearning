@@ -7,9 +7,24 @@ router.get('/',(req,res) =>{
 
 });
 
-router.get('/hello',(req,res,next) =>{
-    console.log("route  Hello");
-    res.json('world');
+router.get('/hello/:message',(req,res,next) =>{
+    const { params } = req;
+    console.log("route  Hello " + params.message);
+    res.json({
+       params
+    });
+});
+
+
+router.get('/users/:userid', async(req,res) =>{  
+    try{
+        const { params } = req;
+        let users = await DB.Users.findByUserID(params.userid);
+        res.json(users)
+    }catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
 });
 
 router.get('/users', async(req,res) =>{  
@@ -40,7 +55,7 @@ router.get('/users/me', async(req,res) =>{
 
 router.post('/users', async(req,res) =>{  
    try{
-       var data = {firstname:req.body.firstname, lastname:req.body.lastname, age:req.body.age};
+       var data = {firstname:req.body.firstname, lastname:req.body.lastname, email:req.body.email, birthday:req.body.birthday};
        
        let users = await DB.Users.addUser(data);
        res.json(users)
@@ -49,6 +64,21 @@ router.post('/users', async(req,res) =>{
        res.sendStatus(500);
    }
 });
+
+router.put('/users/:userid', async(req,res) =>{  
+    try{
+        const { params } = req;
+        let userid = params.userid;
+        console.log("PUT userid " +userid );
+        let data = {firstname:req.body.firstname, lastname:req.body.lastname, email:req.body.email, birthday:req.body.birthday};
+        
+        let users = await DB.Users.updateUser(userid,data);
+        res.json(users)
+    }catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+ });
 
 // router.use(function(req, res, next) {
 //     console.log("set header use");

@@ -18,6 +18,8 @@ class Content extends Component{
     //console.log(this.state);
     this.viewUserDetail = this.viewUserDetail.bind(this);
     this.handleSubmit  = this.handleSubmit.bind(this);
+    this.updateEmployee = this.updateEmployee.bind(this);
+    this.deleteEmployee = this.deleteEmployee.bind(this);
   }
 
   componentDidMount(){
@@ -69,7 +71,7 @@ class Content extends Component{
   }
 
   handleSubmit(event) {
-
+    //event.preventDefault();
     const  url = "http://localhost:5000/users";
     const  data = {
       firstname : this.state.userAdd.firstname,
@@ -88,7 +90,7 @@ class Content extends Component{
         console.log(err);
       })
 
-    //event.preventDefault();
+
     this.setState({users  : ""});
   }
 
@@ -112,20 +114,60 @@ class Content extends Component{
     //this.setState({[nam]: val});
   }
 
+  updateEmployee = (id) =>{
+    //console.log(id);
+    this.props.history.push({
+      pathname :"/AddEmployee",
+      userid : id,
+      type : "UPDATE"
+    });
+  }
+
+  deleteEmployee = (id) =>{
+    console.log(id);
+  }
+
   render(){
       return(
         <div>
           <h3> Learn ReactJS Content</h3>
-          <p align="center">{this.props.title}</p>
-          <p>{this.props.name}</p>
-          <p>{this.props.price}</p>
+          <Link to={{
+            pathname :"/AddEmployee",
+            userid : "",
+            type : "ADD"
+          }}>
+            <button> Add Employee </button></Link>
+          <table id='employee' border="1">
+         <tbody>
+            <tr>                 
+                  <td>Firstname</td>
+                  <td>Lastnaame</td>
+                  <td>Email</td>
+                  <td>BirthDay</td>
+                  <td></td>
+                  <td></td>
+            </tr>
+            {
+              this.state.persons.map(data =>
+                <tr key={data.userid}> 
+                  <td>{data.firstname}</td>
+                  <td>{data.lastname}</td>
+                  <td>{data.email}</td>
+                  <td>{data.birthday}</td>
+                  <td><button onClick={this.updateEmployee.bind(this,data.userid)}> Update </button></td>
+                  <td><button onClick={this.deleteEmployee.bind(this,data.userid)}> Delete </button></td>
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
 
-          {this.state.persons.map(person => 
+          {/* {this.state.persons.map(person => 
             <li key={person.userid}>
                 <Link to="/content" onClick={this.viewUserDetail.bind(this,person.userid)}>
                   {person.firstname} {person.lastname} 
                 </Link>
-              </li>)}
+              </li>)} */}
 
             { 
               // this.state.showDetail ? (

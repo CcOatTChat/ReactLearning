@@ -41,8 +41,24 @@ const findByUserID = async(userId) =>{
 
 const addUser = async(data) =>{
     return new Promise((resolve,reject) => {
-        const query = `INSERT INTO test.user (firstname,lastname,age) 
-                      VALUES ('${data.firstname}','${data.lastname}',${data.age})`;
+        const query = `INSERT INTO test.user (firstname,lastname,email,birthday) 
+                      VALUES ('${data.firstname}','${data.lastname}','${data.email}','${data.birthday}')`;
+        //console.log(query); 
+        Connection.query(query ,(err,results) =>{
+             if(err){
+                 return reject(err);
+             }
+
+             resolve(results);
+        });
+    });
+}
+
+const updateUser = async(userid,data) =>{
+    return new Promise((resolve,reject) => {
+        const query = `UPDATE  test.user SET firstname = '${data.firstname}' ,lastname  = '${data.lastname}'
+                      ,email  = '${data.email}' ,birthday  = '${data.birthday}'
+                      WHERE userid = '${userid}'`;
         //console.log(query); 
         Connection.query(query ,(err,results) =>{
              if(err){
@@ -62,5 +78,6 @@ module.exports = {
     all,
     me,
     findByUserID,
-    addUser
+    addUser,
+    updateUser
 }
