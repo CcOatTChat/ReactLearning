@@ -117,7 +117,7 @@ class Content extends Component{
   updateEmployee = (id) =>{
     //console.log(id);
     this.props.history.push({
-      pathname :"/AddEmployee",
+      pathname :"/AddEmployee/"+id+"/UPDATE",
       userid : id,
       type : "UPDATE"
     });

@@ -7,10 +7,10 @@
 }
 
 const clearData =() => {
-    user.firstname = "";
-    user.lastname = "";
-    user.birthday = "";
-    user.email = "";
+    this.user.firstname = "";
+    this.user.lastname = "";
+    this.user.birthday = "";
+    this.user.email = "";
   }
 
 export default {

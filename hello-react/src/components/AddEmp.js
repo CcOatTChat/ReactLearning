@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import axios from 'axios';
 import user from '../model/user';
 import { Link } from 'react-router-dom';
@@ -10,40 +11,68 @@ class AddEmp extends Component{
 
     this.state ={
       newUser : user.user,
-      location : this.props.location
+      location : this.props.location,
+      userID : "",
+      type : "",
+      params : {
+        userID : "",
+        type : ""
+      }
     }
 
     this.handleSubmit  = this.handleSubmit.bind(this);
     this.myChangeHandler = this.myChangeHandler.bind(this);
 
-    console.log("Location state : " + this.props.location);
-    this.setState({location : this.props.location});
-    console.log("Location state : " + this.state.location);
+
+  }
+
+
+  //static propTypes = {
+  //  type: PropTypes.string.isRequired,
+  //  userid: PropTypes.instanceOf(Int32Array).isRequired 
+  //}
+
+
+  static defaultProps = {
+    message : "ok"
+  }
+
+  componentWillMount(){
+    console.log("props id : " , this.props.match.params.id);
+    console.log("props id : " , this.props.match.params.type);
+
+    if( this.props.match.params.id !== undefined)
+      this.setState({userID : this.props.match.params.id});
+
+    if( this.props.match.params.type !== undefined)
+      this.setState({type :this.props.match.params.type});
+
+      console.log("match props : " , this.props.match.params);
+      
+      this.setState({params :this.props.match.params});
+      console.log("state params : " , this.state.params);
   }
 
   componentDidMount(){
-    const stateObject = JSON.parse(localStorage.getItem("state"));
-    console.log("stateObject : " + stateObject);
-    console.log("localStorage : " + JSON.parse(stateObject));
+    console.log("state params : " , this.state.params);
+    //console.log("props id : " , this.state.userID);
+    //console.log("props id : " , this.state.type);
 
-    console.log("Location props : " + this.props.location.userid);
-    console.log("Location props : " + this.props.location.type);
-    console.log("Location state : " + this.state.location.userid);
-    console.log("Location state : " + this.state.location.type);
+    const stateObject = JSON.parse(localStorage.getItem("state"));
+    console.log(" componentDidMount stateObject : " + stateObject);
 
     //this.clearData();
-    if(this.props.location.type == "UPDATE"){
-      this.getDataByUserID(this.props.location.userid);
+    if(this.state.type == "UPDATE"){
+      this.getDataByUserID(this.state.userID);
     }else{
       //this.clearData();
       this.setState({newUser:user.user});
-      //console.log("Location stage : " + this.state.newUser.firstname);
-      //console.log("Location stage : " + user.user.firstname);
     }
+
   }
 
   getDataByUserID =(userid) => {
-    console.log("getDataByUserID : " + userid);
+    //console.log("getDataByUserID : " + userid);
     let url = "http://localhost:5000/users?userid=" + userid;
     axios.get(url)
       .then(res => {
@@ -58,13 +87,21 @@ class AddEmp extends Component{
         dataUserr.email = userData[0].email;
         dataUserr.birthday = userData[0].birthday;
 
-        //console.log("getDataByUserID : " + dataUserr.email);
+        //console.log("getDataByUserID : " , dataUserr);
         this.setState({newUser  : dataUserr});
+        //console.log("newUser: ",this.state.newUser);
 
       })
       .catch(err =>{
         console.log(err);
       })
+
+     //console.log("newUser: ",{...this.state.newUser});
+     //console.log("newUser: ",{...user.user});
+     //console.log("newUser: ",this.state.newUser);
+
+      let obj1 = { a: 1, b: "s" }
+      //console.log("obj1: ", { ...obj1}) // {"a":1,"b":2,"c":3,"d":4}
   }
 
   clearData =() => {
@@ -76,10 +113,6 @@ class AddEmp extends Component{
   
   handleSubmit(e) {
     //e.preventDefault();
-
-    console.log("Location props : " + this.props.location.userid);
-    console.log("Location props : " + this.props.location.type);
-
     if(this.props.location.type == "UPDATE"){
       this.updateUser(e);
     }else{
